@@ -1,0 +1,26 @@
+create table departamento(
+	cod_dpto varchar(4),
+	nombre_dpto varchar(40)
+);
+
+create table empleado(
+	dni  varchar(9),
+	nombre varchar(40),
+	apellidos varchar(40),
+	fecha_nac date,
+	salario double
+);
+
+create table emple_depart(
+	dni  varchar(9),
+	cod_dpto varchar(4),
+	fecha_ini datetime,
+	fecha_fin datetime
+);
+
+alter table departamento add constraint pk_departamento primary key (cod_dpto);
+alter table empleado add constraint pk_empleado primary key (dni);
+alter table emple_depart add constraint pk_emple_depart primary key (dni, cod_dpto,fecha_ini);
+
+ALTER table emple_depart ADD CONSTRAINT fk_empledepart_dni FOREIGN KEY (dni) REFERENCES empleado(dni);
+ALTER table emple_depart ADD CONSTRAINT fk_empledepart_dpto FOREIGN KEY (cod_dpto) REFERENCES departamento(cod_dpto);
